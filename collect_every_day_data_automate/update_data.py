@@ -227,7 +227,7 @@ def update_daily_data():
 
     # SAVE OUTPUT
     os.makedirs("data", exist_ok=True)
-    with open("DOWNLOAD_PATH, "w") as f:
+    with open(DOWNLOAD_PATH, "w") as f:
         json.dump(predictions, f, indent=4)
 
     print("Night inference completed successfully in record time!")
