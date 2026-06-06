@@ -1,8 +1,10 @@
 name: Nightly AI Market Update
 on:
+  push:
+    branches: [ "main" ]        # <--- THIS FIXES THE GITHUB BUG
   schedule:
-    - cron: '30 12 * * 1-5' # Runs at 6:00 PM IST
-  workflow_dispatch:        # Allows you to click "Run workflow" in GitHub
+    - cron: '30 12 * * 1-5'     # Runs at 6:00 PM IST
+  workflow_dispatch:            # Allows you to click "Run workflow" in GitHub
 
 jobs:
   update-data:
@@ -22,7 +24,6 @@ jobs:
       - name: Run Data Updater
         run: python collect_every_day_data_automate/update_data.py
         env:
-          # If your script needs credentials, add them here
           TZ: 'Asia/Kolkata'
 
       - name: Commit and Push Changes
