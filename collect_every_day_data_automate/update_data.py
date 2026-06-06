@@ -3,6 +3,7 @@ import os
 # Must be set before TensorFlow is imported!
 os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 
+
 import yfinance as yf
 import pandas as pd
 import numpy as np
@@ -13,6 +14,15 @@ import tensorflow as tf
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import LSTM, Dense, Dropout, BatchNormalization
 from tensorflow.keras.regularizers import l1_l2
+
+
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+
+# 2. Build the absolute paths (since they are in the same folder as the script)
+MODEL_PATH = os.path.join(SCRIPT_DIR, "quant_lstm_model.keras")
+SCALER_PATH = os.path.join(SCRIPT_DIR, "quant_scaler.pkl")
+# Do the same for feature_columns if you load them here:
+FEATURES_PATH = os.path.join(SCRIPT_DIR, "feature_columns.pkl")
 
 # Disable visible GPUs in TF just to be completely safe on Mac
 try:
@@ -40,14 +50,14 @@ def build_reconstructed_model():
 try:
     print("Reconstructing model architecture...")
     model = build_reconstructed_model()
-    model.load_weights("quant_lstm_model.keras") 
+    model.load_weights(MODEL_PATH) 
     print("✅ Model weights loaded successfully!")
 except Exception as e:
     print(f"❌ Critical error loading model: {e}")
 
 # LOAD ARTIFACTS
-scaler = joblib.load("quant_scaler.pkl")
-FEATURE_COLS = joblib.load("feature_columns.pkl")
+scaler = joblib.load("SCALER_PATH")
+FEATURE_COLS = joblib.load("FEATURES_PATH")
 TIME_STEPS = 10
 
 def calculate_local_features(df):
