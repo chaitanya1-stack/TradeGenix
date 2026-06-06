@@ -15,7 +15,7 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import LSTM, Dense, Dropout, BatchNormalization
 from tensorflow.keras.regularizers import l1_l2
 
-
+DATA_DIR = os.path.join(SCRIPT_DIR, "data")
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # 2. Build the absolute paths (since they are in the same folder as the script)
