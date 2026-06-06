@@ -23,6 +23,7 @@ MODEL_PATH = os.path.join(SCRIPT_DIR, "quant_lstm_model.keras")
 SCALER_PATH = os.path.join(SCRIPT_DIR, "quant_scaler.pkl")
 # Do the same for feature_columns if you load them here:
 FEATURES_PATH = os.path.join(SCRIPT_DIR, "feature_columns.pkl")
+DOWNLOAD_PATH = os.path.join(DATA_DIR, "latest_predictions.json")
 
 # Disable visible GPUs in TF just to be completely safe on Mac
 try:
@@ -226,7 +227,7 @@ def update_daily_data():
 
     # SAVE OUTPUT
     os.makedirs("data", exist_ok=True)
-    with open("data/latest_predictions.json", "w") as f:
+    with open("DOWNLOAD_PATH, "w") as f:
         json.dump(predictions, f, indent=4)
 
     print("Night inference completed successfully in record time!")
