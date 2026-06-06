@@ -1,0 +1,35 @@
+name: Nightly AI Market Update
+on:
+  schedule:
+    - cron: '30 12 * * 1-5' # Runs at 6:00 PM IST
+  workflow_dispatch:        # Allows you to click "Run workflow" in GitHub
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install Dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run Data Updater
+        run: python collect_every_day_data_automate/update_data.py
+        env:
+          # If your script needs credentials, add them here
+          TZ: 'Asia/Kolkata'
+
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name 'GitHub Action Bot'
+          git config --global user.email 'action@github.com'
+          # Add the predictions file your script generated
+          git add collect_every_day_data_automate/data/latest_predictions.json
+          git commit -m "Automated nightly AI prediction update" || exit 0
+          git push

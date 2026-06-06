@@ -1,0 +1,24 @@
+# --- Python Environment & Bytecode ---
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+env/
+venv/
+.ipynb_checkpoints/
+
+# --- IDE & System ---
+.DS_Store
+.vscode/
+.idea/
+
+# --- Project Specific Large Data & CSVs ---
+# Removed per your request
+stock_data.csv
+output_report.html
+output_report1.html
+stock_data_with_features_removed_correlated.csv
+
+# Other Data Files
+
+tuner_results/
