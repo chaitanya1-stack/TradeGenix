@@ -56,8 +56,8 @@ except Exception as e:
     print(f"❌ Critical error loading model: {e}")
 
 # LOAD ARTIFACTS
-scaler = joblib.load("SCALER_PATH")
-FEATURE_COLS = joblib.load("FEATURES_PATH")
+scaler = joblib.load(SCALER_PATH)
+FEATURE_COLS = joblib.load(FEATURES_PATH)
 TIME_STEPS = 10
 
 def calculate_local_features(df):
